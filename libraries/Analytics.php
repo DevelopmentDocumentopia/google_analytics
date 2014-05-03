@@ -536,6 +536,25 @@ class Analytics {
 		arsort($aData);
 		return $aData;
 	}
+    
+    
+    /**
+     * Get screen resolution for given period
+     *
+     */
+    public function getMobileDeviceInfo()
+    {
+        $aData = $this->getData(array(
+            'dimensions' => 'ga:MobileDeviceInfo',
+            'metrics' => 'ga:visits',
+            'sort' => 'ga:visits'
+        ));
+
+        // sort descending by number of visits
+        arsort($aData);
+        return $aData;
+    }
+    
 
 	/**
 	 * Get screen resolution for given period

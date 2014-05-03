@@ -1,5 +1,52 @@
 <?php if (isset($analytic_visits) OR isset($analytic_views)): ?>
-<?=js('flot', 'google_analytics')?>
+<?=js('jquery.flot', 'google_analytics')?>
+<?=js('jquery.flot.time', 'google_analytics')?>
+<?=js('jquery.flot.pie', 'google_analytics')?>
+
+<script type="text/javascript">
+var piechart = <?php echo isset($analytic_browsers) ? $analytic_browsers : 0; ?>;
+
+        $('#browser').css({
+            height: '300px',
+            width: '50%'
+        });
+ 
+        $(document).ready(function () {
+            $.plot($("#browser"), piechart, {
+                 series: {
+                    pie: {
+                        show: true
+                    }
+                 },
+                legend: {
+                    show: false
+                }         
+            });
+        });
+</script>
+
+<script type="text/javascript">
+var ospiechart = <?php echo isset($analytic_os) ? $analytic_os : 0; ?>;
+
+        $('#os').css({
+            height: '300px',
+            width: '50%'
+        });
+ 
+        $(document).ready(function () {
+            $.plot($("#os"), ospiechart, {
+                 series: {
+                    pie: {
+                        show: true
+                    }
+                 },
+                legend: {
+                    show: false
+                }         
+            });
+        });
+</script>
+
 <script type="text/javascript" >
 
 	jQuery(function($) {
@@ -66,4 +113,9 @@
 <h2><a href="https://www.google.com/analytics" title="Google Analytics login">Google Analytics</a> monthly report</h2>
 <img src="<?=img_path('ga.png', 'google_analytics')?>" alt="" />
 <div id="analytics" class="line" style="padding-bottom: 10px"></div>
+
+<div id="browser" class="line" style="padding-bottom: 0px;float: left;"></div>
+
+<div id="os" class="line" style="padding-bottom: 0px;float: left;"></div>
+
 <?php endif; ?>

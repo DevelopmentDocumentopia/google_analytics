@@ -53,7 +53,15 @@ class Dashboard extends Fuel_base_controller {
 			catch(Exception $e) {
 				echo '<p class="dashboard_error">'.lang('google_analytics_connect_error').'</p>';
 				die();
-			}
+			}       
+            $browsers=$this->fuel->google_analytics->browsers();    
+            $os=$this->fuel->google_analytics->os();
+            $this->fuel->google_analytics->visit();
+            //$this->fuel->google_analytics->devices();
+            
+            $data['analytic_browsers'] = json_encode($browsers);
+            $data['analytic_os'] = json_encode($os);
+            
 			$data['analytic_visits'] = json_encode($visits);
 			$data['analytic_views'] = json_encode($views);
 			$this->load->view('_admin/graph', $data);
